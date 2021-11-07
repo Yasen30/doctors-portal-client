@@ -12,11 +12,13 @@ import {
 import { NavLink } from "react-router-dom";
 import UseAuth from "../../../Hooks/UseAuth";
 import Google from "../Google";
+import axios from "axios";
+import swal from "sweetalert";
 
 const Register = () => {
   let history = useHistory();
   let location = useLocation();
-  const redirectUrl = location.state?.from || "/home";
+  const redirectUrl = location?.state?.from || "/home";
   const {
     register,
     handleSubmit,
@@ -39,6 +41,8 @@ const Register = () => {
         setUser(result);
         setError("");
         updateUser(data.name);
+        // saved user function call
+        savedUser(data);
       })
       .catch((error) => {
         setError(error.message);
@@ -46,7 +50,15 @@ const Register = () => {
       })
       .finally(() => setIsLoading(false));
   };
-
+  // saved user functon
+  const savedUser = (data) => {
+    console.log(data);
+    axios.post("http://localhost:5000/users", data).then((res) => {
+      if (res.data.id) {
+        swal("Good job!", "Your Aceount !", "success");
+      }
+    });
+  };
   return (
     <Container>
       <Grid container spacing={2}>

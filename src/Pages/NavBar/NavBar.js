@@ -35,12 +35,22 @@ const NavBar = () => {
           </Link>
           <Link
             style={{ textDecoration: "none", margin: "0 10px", color: "white" }}
-            to="/apoinment"
+            to="/appointment"
           >
             Appointment
           </Link>
           {user?.email ? (
             <>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  margin: "0 10px",
+                  color: "white",
+                }}
+                to="/dashboard"
+              >
+                DashBoard
+              </Link>
               <span>{user?.displayName}</span>
               <Button
                 style={{

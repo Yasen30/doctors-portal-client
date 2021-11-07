@@ -17,8 +17,7 @@ const Login = () => {
   // history , and location
   let history = useHistory();
   let location = useLocation();
-  const redirectUrl = location.state?.from || "/home";
-  console.log(redirectUrl);
+  const redirectUrl = location?.state?.from || "/home";
 
   const {
     register,

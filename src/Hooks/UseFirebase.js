@@ -9,6 +9,7 @@ import {
   updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
+  getIdToken,
 } from "firebase/auth";
 
 // init firebase auth
@@ -17,7 +18,9 @@ firebaseInit();
 const UseFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState("");
   const [error, setError] = useState("");
+  const [admin, setAdmin] = useState(false);
   // auth
   const auth = getAuth();
 
@@ -46,6 +49,9 @@ const UseFirebase = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        getIdToken(user).then((idToken) => {
+          setToken(idToken);
+        });
       }
       setIsLoading(false);
     });
@@ -68,10 +74,18 @@ const UseFirebase = () => {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAdmin(data?.isAdmin);
+      });
+  }, [user?.email]);
   return {
     user,
     setUser,
     isLoading,
+    token,
     setIsLoading,
     emailPasswordCreate,
     emailPasswordSignin,
@@ -80,6 +94,8 @@ const UseFirebase = () => {
     error,
     setError,
     gogleSignIn,
+    admin,
+    setAdmin,
   };
 };
 

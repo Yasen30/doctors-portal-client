@@ -37,6 +37,7 @@ const BookingModal = ({ open, data, handleClose, date }) => {
     data["date"] = date.toLocaleDateString();
     data["servicesName"] = name;
     data["time"] = time;
+    data["email"] = user?.email;
     console.log(data);
     axios.post("http://localhost:5000/appointments", data).then((res) => {
       if (res.data.insertedId) {
@@ -95,7 +96,7 @@ const BookingModal = ({ open, data, handleClose, date }) => {
 
           {user?.email && (
             <TextField
-              {...register("email", { required: true })}
+              disabled
               sx={{ width: "90%", m: 1 }}
               defaultValue={user?.email}
               id="standard-basic"
@@ -103,10 +104,6 @@ const BookingModal = ({ open, data, handleClose, date }) => {
               variant="standard"
             />
           )}
-          {errors.email && (
-            <p style={{ color: "red" }}>This field is required</p>
-          )}
-
           <TextField
             id="standard-search"
             sx={{ width: "90%", m: 1 }}

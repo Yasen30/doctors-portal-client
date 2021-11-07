@@ -3,6 +3,7 @@ import React from "react";
 import Calender from "../../Calendar/Calender";
 
 const ApointmentHeader = ({ date, setDate }) => {
+  console.log(date);
   return (
     <Container>
       <Grid container spacing={2}>
