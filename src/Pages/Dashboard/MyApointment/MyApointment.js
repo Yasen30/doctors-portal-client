@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import UseAuth from "../../../Hooks/UseAuth";
+import { Link } from "react-router-dom";
 
 const MyApointment = ({ date }) => {
   const { user, token } = UseAuth();
@@ -53,7 +54,15 @@ const MyApointment = ({ date }) => {
                 </TableCell>
                 <TableCell align="right">{row.time}</TableCell>
                 <TableCell align="right">{row.servicesName}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
+                <TableCell align="right">
+                  {row.payment ? (
+                    "Paid"
+                  ) : (
+                    <Link to={`/dashboard/payment/${row._id}`}>
+                      <button>Pay</button>
+                    </Link>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

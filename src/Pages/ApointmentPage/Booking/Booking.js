@@ -4,7 +4,8 @@ import Paper from "@mui/material/Paper";
 import BookingModal from "../BookignModal/BookingModal";
 
 const Booking = (props) => {
-  const { name, time, space } = props.data;
+  const { name, time, space, price } = props.data;
+  console.log(props.data);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -24,6 +25,9 @@ const Booking = (props) => {
           </Typography>
           <Typography variant="h6" component="div">
             {space} SPACES AVAILABLE
+          </Typography>
+          <Typography variant="h6" component="div">
+            $ {price}
           </Typography>
           <Button onClick={handleOpen} sx={{ my: 3 }} variant="contained">
             Book Available

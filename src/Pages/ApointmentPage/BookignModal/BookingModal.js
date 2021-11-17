@@ -22,7 +22,8 @@ const style = {
 };
 
 const BookingModal = ({ open, data, handleClose, date }) => {
-  const { name, time, space } = data;
+  const { name, time, space, price } = data;
+  console.log(price);
   // get value form useAuth
   const { user } = UseAuth();
 
@@ -36,6 +37,7 @@ const BookingModal = ({ open, data, handleClose, date }) => {
   const onSubmit = (data) => {
     data["date"] = date.toLocaleDateString();
     data["servicesName"] = name;
+    data["price"] = price;
     data["time"] = time;
     data["email"] = user?.email;
     console.log(data);

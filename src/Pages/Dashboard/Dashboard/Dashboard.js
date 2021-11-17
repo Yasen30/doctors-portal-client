@@ -16,6 +16,7 @@ import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
 import AddDoctor from "../AddDoctor/AddDoctor";
 import AdminRoute from "../../Login/AdminRoute/AdminRoute";
+import Payment from "../Payment/Payment";
 const drawerWidth = 200;
 
 function Dashboard(props) {
@@ -163,6 +164,9 @@ function Dashboard(props) {
         <Switch>
           <Route exact path={path}>
             <DashboardHome></DashboardHome>
+          </Route>
+          <Route path={`${path}/payment/:id`}>
+            <Payment></Payment>
           </Route>
           <AdminRoute path={`${path}/makeAdmin`}>
             <MakeAdmin></MakeAdmin>
